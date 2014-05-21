@@ -2,13 +2,14 @@
 	(:require [clojure.java.jdbc :as sql]))
 
 (let [db-host "localhost"
-      db-port 5432
+      db-port 3306
       db-name "blog"]
-  (def db {:classname "org.postgresql.Driver" ; must be in classpath
-        :subprotocol "postgresql"
-        :subname (str "//" db-host ":" db-port "/" db-name)
-        :user "admin"
-        :password "admin"}))
+
+  (def db {:classname "com.mysql.jdbc.Driver" ; must be in classpath
+           :subprotocol "mysql"
+           :subname (str "//" db-host ":" db-port "/" db-name)
+           :user "blog"
+           :password "blog"}))
 
 (defn create-user [user]
 	(sql/with-connection db

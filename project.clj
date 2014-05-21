@@ -12,7 +12,7 @@
                  [environ "0.5.0"]
                  [org.clojure/java.jdbc "0.2.3"]
                  [org.xerial/sqlite-jdbc "3.7.2"]
-                 [postgresql/postgresql "9.1-901.jdbc4"]]
+                 [mysql/mysql-connector-java "5.1.6"]]
 
   :repl-options {:init-ns blog.repl}
   :plugins [[lein-ring "0.8.10"]

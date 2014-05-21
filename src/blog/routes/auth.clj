@@ -42,6 +42,9 @@
 		:else
 			"An error has occured while processing the request"))
 
+(defn tull []
+  (crypt/encrypt "idi0t200"))
+
 (defn handle-registration [id pass pass1]
 	(if (valid? id pass pass1)
 		(try

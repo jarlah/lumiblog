@@ -36,18 +36,6 @@
     [:shared-appender-config :rotor]
     {:path "blog.log" :max-size (* 512 1024) :backlog 10})
 
-  (try
-    (schema/create-users-table)
-    ;; encrypt a password with noir.util.crypt/encrypt
-    ;; (db/create-user {:id "username" :name "fullname" :pass "encryptedpass"})
-    (catch Exception ex
-      (timbre/info "Tables users exists already" ex)))
-
-  (try
-    (schema/create-entries-table)
-    (catch Exception ex
-      (timbre/info "Table entries exists already" ex)))
-
   (if (env :dev) (parser/cache-off!))
   (timbre/info "blog started successfully"))
 
