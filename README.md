@@ -32,4 +32,4 @@ To start a web server for the application, run:
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2014 Jarl André Hübenthal
