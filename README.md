@@ -1,4 +1,4 @@
-# test-app
+# lumiblog
 
 A blog written with the Luminus web framework. A users table with an auth handler and a entries table with an admin handler. And finally a home handler that displays the latest ten entries. Uses Postgresql and expects a database blog on localhost with username admin and password admin. The blog will automatically try to create the table when it starts up.
 
