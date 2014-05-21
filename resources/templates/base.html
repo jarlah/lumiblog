@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Jarl André Hübenthal | My blog</title>
+  </head>
+  <body>
+    <!-- navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{{servlet-context}}/">Blog</a>
+        </div>
+        <div class="navbar-collapse collapse ">
+          <ul class="nav navbar-nav">
+            <li class="{{home-selected}}"><a href="{{servlet-context}}/">Home</a></li>
+            <li class="{{about-selected}}"><a href="{{servlet-context}}/about">About</a></li>
+            {% if user %}
+            <li class="{{add-entry-selected}}"><a href="{{servlet-context}}/add-entry">Add entry</a></li>
+            <li><a href="{{servlet-context}}/logout">Logout</a></li>
+            {% else %}
+            <li class="{{login-selected}}"><a href="{{servlet-context}}/login">Login</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <!-- scripts and styles -->
+    {% style "/css/bootstrap-theme.min.css" %}
+    {% style "/css/bootstrap.min.css" %}
+    {% style "/css/screen.css" %}
+    {% script "/js/jquery-2.1.1.min.js" %}
+    {% script "/js/tinymce/tinymce.min.js" %}
+    {% script "/js/bootstrap.min.js" %}
+    {% script "/js/blog.js" %}
+    <script type="text/javascript">
+      var context = "{{servlet-context}}";
+    </script>
+  </body>
+</html>
+

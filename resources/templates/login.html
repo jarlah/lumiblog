@@ -1,0 +1,24 @@
+{% extends "templates/base.html" %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="{{servlet-context}}/login" method="post">
+                        <div>
+                            <label for="id">User ID:</label>
+                            <input type="text" name="id" />
+                        </div>
+                        <div>
+                            <label for="pass">Password:</label>
+                            <input type="password" name="pass" />
+                        </div>
+                        <div>
+                            <input type="submit" value="Login" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

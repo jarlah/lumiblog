@@ -1,0 +1,27 @@
+{% extends "templates/base.html" %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="{{servlet-context}}/add-entry" method="post">
+                        <div>
+                            <label for="title">Title:</label>
+                            <input type="title" name="title" style="width:100%" value="{{title}}"/>
+                        </div>
+                        <div>
+                            <label for="content">Content:</label>
+                            <textarea rows="20" cols="20" name="content">{{content}}</textarea>
+                        </div>
+                        <div>
+                            <input type="submit" value="Add new entry" />
+                        </div>
+                        {% for error in errors %}
+                        <div class="error">{{error}}</div>
+                        {% endfor %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

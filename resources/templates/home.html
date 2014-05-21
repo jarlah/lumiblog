@@ -1,0 +1,29 @@
+{% extends "templates/base.html" %}
+{% block content %}
+  <div class="jumbotron">
+    <h1>Welcome to {% if user %}your{% else %}my{% endif %} blog {{user}}</h1>
+    <p>Where I share my thoughts</p>
+      <p><a class="btn btn-primary btn-lg" href="{{servlet-context}}/about">Read more &raquo;</a></p>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span8">
+        <section class="latest-articles">
+            {% for entry in entries %}
+            <article class="panel panel-primary">
+                <header class="panel-heading">
+                    <h2 class="panel-title">{{entry.title}}</h2>
+                    <time>{{entry.publishedDate|date:shortDate}}</time>
+                </header>
+                <div class="panel-body">
+                    {{entry.content|safe}}
+                </div>
+                <footer class="panel-footer">
+                    {{entry.authorid}}
+                </footer>
+            </article>
+            {% endfor %}
+        </section>
+    </div>
+  </div>
+{% endblock %}
