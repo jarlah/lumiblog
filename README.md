@@ -1,8 +1,20 @@
 # lumiblog
 
-A blog written with the Luminus web framework. A users table with an auth handler and a entries table with an admin handler. And finally a home handler that displays the latest ten entries. Uses Postgresql and expects a database blog on localhost with username admin and password admin. The blog will automatically try to create the table when it starts up.
+A blog written with the Luminus web framework. A users table with an auth handler and a entries table with an admin handler. And finally a home handler that displays the latest ten entries. Uses mysql and expects a database blog on localhost with granted access for username blog and password blog. The tables must be created manually and should contain:
 
-Possible areas for extension:
+entries
+- id int
+- title varchar
+- content varchar
+- publishedDate timestamp default current_timestamp
+- authorid varchar
+
+users
+- id varchar
+- name varchar
+- pass varchar (noir.util.crypt/encrypt "password")
+
+TODOS:
 
 1. Create an individual administration page
    * Listing entries
