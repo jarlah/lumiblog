@@ -14,7 +14,7 @@ users
 - name varchar
 - pass varchar (noir.util.crypt/encrypt "password")
 
-Possible areas for extension:
+TODOS:
 
 1. Create an individual administration page
    * Listing entries
