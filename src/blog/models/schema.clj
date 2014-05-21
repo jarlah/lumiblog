@@ -8,18 +8,18 @@
 		db
 		(sql/create-table
 			:users
-			[:id "TEXT PRIMARY KEY"]
-      [:name "TEXT"]
-			[:pass "TEXT"])))
+			[:id "varchar(255)"]
+      [:name "varchar(255)"]
+			[:pass "varchar(255)"])))
 
 (defn create-entries-table []
 	(sql/with-connection
 		db
 		(sql/create-table
 			:entries
-			[:id "serial"]
-			[:title "TEXT"]
-      [:content "TEXT"]
+			[:id "INT PRIMARY KEY AUTO_INCREMENT"]
+			[:title "varchar(255)"]
+      [:content "LONGTEXT"]
       [:createdDate "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"]
       [:publishedDate "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"]
-      [:authorid "TEXT"])))
+      [:authorid "varchar(255)"])))
