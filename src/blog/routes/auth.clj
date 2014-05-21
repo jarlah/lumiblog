@@ -20,15 +20,6 @@
 		[:pass "entered passwords do not match"])
 	(not (vali/errors? :id :pass :pass1)))
 
-(defn error-item [[error]]
-	[:div.error error])
-
-(defn control [id label field]
-	(list
-		(vali/on-error id error-item)
-		label field
-		[:br]))
-
 (defn registration-page [& [id]]
 	(layout/render "register.html" {:id id :errors (vali/get-errors (:id :pass))}))
 
@@ -41,9 +32,6 @@
 			(str "The user with id " id " already exists!")
 		:else
 			"An error has occured while processing the request"))
-
-(defn tull []
-  (crypt/encrypt "idi0t200"))
 
 (defn handle-registration [id pass pass1]
 	(if (valid? id pass pass1)

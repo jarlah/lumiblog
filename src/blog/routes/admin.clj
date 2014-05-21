@@ -8,9 +8,6 @@
             [noir.response :as resp]
             [noir.validation :as vali]))
 
-(defn error-item [[error]]
-	[:div.error error])
-
 (defn display-add-entry [& [title content]]
   (layout/render "add-entry.html" {:title title :content content :errors (vali/get-errors (:title :content))}))
 
