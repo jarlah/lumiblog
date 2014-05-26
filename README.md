@@ -8,9 +8,10 @@ TODOS:
    * ~~Listing entries~~
    * ~~Editing entries~~
    * ~~Deleting entries~~
-   * ~~Updating entries~~
+   * ~~Creating entries~~
    * ~~Listing users~~
    * ~~Deleting users~~
+   * ~~Registering user~~
    * Editing users
 2. Paginating the entries on the front page
    * Enough with forward and back button
