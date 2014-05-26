@@ -2,9 +2,12 @@
 {% block content %}
     <div class="row-fluid">
         <div class="span8">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Add new entry</h2>
+                </header>
                 <div class="panel-body">
-                    <form action="{{servlet-context}}/add-entry" method="post">
+                    <form action="" method="post">
                         <div>
                             <label for="title">Title:</label>
                             <input type="title" name="title" style="width:100%" value="{{title}}"/>
@@ -14,7 +17,7 @@
                             <textarea rows="20" cols="20" name="content">{{content}}</textarea>
                         </div>
                         <div>
-                            <input type="submit" value="Add new entry" />
+                            <input type="submit" value="Submit entry" />
                         </div>
                         {% for error in errors %}
                         <div class="error">{{error}}</div>

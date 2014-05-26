@@ -1,0 +1,19 @@
+{% extends "templates/base.html" %}
+{% block content %}
+  <div class="row-fluid">
+    <div class="span8">
+        <div class="panel panel-primary">
+            <header class="panel-heading">
+                <h2 class="panel-title">Administration</h2>
+            </header>
+            <div class="panel-body">
+                <div class="btn-group">
+                    <a href="{{servlet-context}}/admin/entries" class="btn btn-primary btn-large"><i class="icon-white icon-pencil"></i> Manage entries</a>
+                    <a href="{{servlet-context}}/admin/entry" class="btn btn-primary btn-large"><i class="icon-white icon-pencil"></i> Add new entry</a>
+                    <a href="{{servlet-context}}/admin/users" class="btn btn-primary btn-large"><i class="icon-white icon-pencil"></i> Manage users</a>
+                </div>
+            </div>
+        </article>
+    </div>
+  </div>
+{% endblock %}

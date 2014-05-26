@@ -1,0 +1,21 @@
+{% extends "templates/base.html" %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="panel panel-primary">
+            <header class="panel-heading">
+                <h2 class="panel-title">Manage entries</h2>
+            </header>
+            <div class="panel-body">
+               <table class="table">
+                   {% for entry in entries %}
+                   <tr>
+                       <td><a href="{{servlet-context}}/admin/entry/{{entry.id}}">{{entry.title}}</a></td>
+                       <td><a href="{{servlet-context}}/admin/entry/{{entry.id}}/delete">Delete</a></td>
+                   </tr>
+                   {% endfor %}
+               </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

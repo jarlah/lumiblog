@@ -1,0 +1,16 @@
+{% extends "templates/base.html" %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="" method="post">
+                        Do you really want to delete "{{title}}"?
+                        <input type="submit" value="Yes, delete it." />
+                    </form>
+                    <a href="{{servlet-context}}/admin/entries">No.</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

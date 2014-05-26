@@ -8,9 +8,9 @@
 		db
 		(sql/create-table
 			:users
-			[:id "varchar(255)"]
-      [:name "varchar(255)"]
-			[:pass "varchar(255)"])))
+			[:id "VARCHAR(255)"]
+      [:name "VARCHAR(255)"]
+			[:pass "VARCHAR(255)"])))
 
 (defn create-entries-table []
 	(sql/with-connection
@@ -18,8 +18,8 @@
 		(sql/create-table
 			:entries
 			[:id "INT PRIMARY KEY AUTO_INCREMENT"]
-			[:title "varchar(255)"]
+			[:title "VARCHAR(255)"]
       [:content "LONGTEXT"]
       [:createdDate "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"]
       [:publishedDate "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"]
-      [:authorid "varchar(255)"])))
+      [:authorid "VARCHAR(255)"])))
