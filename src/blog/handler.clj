@@ -46,7 +46,7 @@
   (timbre/info "blog is shutting down..."))
 
 (defn user-page [_]
-  (session/get :user))
+  (= 0 (:level (session/get :user))))
 
 (def app (app-handler
            ;; add your application routes here

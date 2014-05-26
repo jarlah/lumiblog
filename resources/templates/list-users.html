@@ -7,7 +7,14 @@
                 <h2 class="panel-title">Manage users</h2>
             </header>
             <div class="panel-body">
-               Not implemented
+               <table class="table">
+                   {% for user in users %}
+                   <tr>
+                       <td><a href="{{servlet-context}}/admin/user/{{user.id}}">{{user.id}}</a></td>
+                       <td><a href="{{servlet-context}}/admin/user/{{user.id}}/delete">Delete</a></td>
+                   </tr>
+                   {% endfor %}
+               </table>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 {% extends "templates/base.html" %}
 {% block content %}
   <div class="jumbotron">
-    <h1>Welcome to {% if user %}your{% else %}my{% endif %} blog {{user}}</h1>
+    <h1>Welcome to {% if user %}your{% else %}my{% endif %} blog {{user.name}}</h1>
     <p>Where I share my thoughts</p>
       <p><a class="btn btn-primary btn-lg" href="{{servlet-context}}/about">Read more &raquo;</a></p>
   </div>

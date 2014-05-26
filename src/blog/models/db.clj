@@ -17,17 +17,22 @@
 (defn get-all-users []
 	(sql/with-connection db
 		(sql/with-query-results
-			res ["select * from users"] (first res))))
+			res ["select * from users"] (doall res))))
 
 (defn get-user-count []
 	(sql/with-connection db
 		(sql/with-query-results
 			res ["select count(id) as count from users"] (first res))))
 
-(defn get-user [id]
+(defn get-active-user [id]
 	(sql/with-connection db
 		(sql/with-query-results
 			res ["select * from users where id=? and active=1" id] (first res))))
+
+(defn get-user [id]
+	(sql/with-connection db
+		(sql/with-query-results
+			res ["select * from users where id=?" id] (first res))))
 
 (defn get-latest-entries [max]
 	(sql/with-connection db
@@ -47,3 +52,6 @@
 
 (defn delete-entry [id]
 	(sql/with-connection db (sql/delete-rows :entries ["id=?" id])))
+
+(defn delete-user [id]
+	(sql/with-connection db (sql/delete-rows :users ["id=?" id])))

@@ -11,14 +11,16 @@
 	(:import java.sql.SQLException
 			 java.io.File))
 
-(defn valid? [id pass pass1]
+(defn valid? [id name pass pass1]
 	(vali/rule (vali/has-value? id)
 		[:id "user id is required"])
+  (vali/rule (vali/has-value? name)
+		[:name "name is required"])
 	(vali/rule (vali/min-length? pass 5)
 		[:pass "password must be at least 5 characters"])
 	(vali/rule (= pass pass1)
 		[:pass "entered passwords do not match"])
-	(not (vali/errors? :id :pass :pass1)))
+	(not (vali/errors? :id :name :pass :pass1)))
 
 (defn registration-page [& [id]]
 	(layout/render "register.html" {:id id :errors (vali/get-errors (:id :pass))}))
@@ -36,10 +38,18 @@
 (defn get-active-flag []
   (if (= 0 (:count (db/get-user-count))) 1 0))
 
+(defn get-level-flag []
+  (if (= 0 (:count (db/get-user-count))) 0 1))
+
 (defn handle-registration [id name pass pass1]
-	(if (valid? id pass pass1)
+	(if (valid? id name pass pass1)
 		(try
-			(db/create-user {:id id :name name :pass (crypt/encrypt pass) :active (get-active-flag)})
+			(db/create-user {
+        :id id
+        :name name
+        :pass (crypt/encrypt pass)
+        :active (get-active-flag)
+        :level (get-level-flag)})
 			(resp/redirect "/login")
 			(catch Exception ex
 				(vali/rule false [:id (format-error id ex)])
@@ -47,9 +57,9 @@
 		(registration-page id name)))
 
 (defn handle-login [id pass]
-	(let [user (db/get-user id)]
+	(let [user (db/get-active-user id)]
 		(if (and user (crypt/compare pass (:pass user)))
-			(session/put! :user (:name user)))
+			(session/put! :user user))
 	(resp/redirect "/")))
 
 (defn handle-logout []
