@@ -14,10 +14,20 @@
 (defn create-user [user]
 	(sql/with-connection db (sql/insert-record :users user)))
 
+(defn get-all-users []
+	(sql/with-connection db
+		(sql/with-query-results
+			res ["select * from users"] (first res))))
+
+(defn get-user-count []
+	(sql/with-connection db
+		(sql/with-query-results
+			res ["select count(id) as count from users"] (first res))))
+
 (defn get-user [id]
 	(sql/with-connection db
 		(sql/with-query-results
-			res ["select * from users where id=?" id] (first res))))
+			res ["select * from users where id=? and active=1" id] (first res))))
 
 (defn get-latest-entries [max]
 	(sql/with-connection db

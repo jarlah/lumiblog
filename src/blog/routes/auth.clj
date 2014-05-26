@@ -33,16 +33,18 @@
 		:else
 			"An error has occured while processing the request"))
 
-(defn handle-registration [id pass pass1]
+(defn get-active-flag []
+  (if (= 0 (:count (db/get-user-count))) 1 0))
+
+(defn handle-registration [id name pass pass1]
 	(if (valid? id pass pass1)
 		(try
-			(db/create-user {:id id :pass (crypt/encrypt pass)})
-			(session/put! :user id)
-			(resp/redirect "/")
+			(db/create-user {:id id :name name :pass (crypt/encrypt pass) :active (get-active-flag)})
+			(resp/redirect "/login")
 			(catch Exception ex
 				(vali/rule false [:id (format-error id ex)])
 				(registration-page)))
-		(registration-page id)))
+		(registration-page id name)))
 
 (defn handle-login [id pass]
 	(let [user (db/get-user id)]
@@ -55,11 +57,10 @@
 	(resp/redirect "/"))
 
 (defroutes auth-routes
-  ;; enable these if you want to open the doors...
-	;;(GET "/register" []
-	;;	(registration-page))
-	;;(POST "/register" [id pass pass1]
-	;;	(handle-registration id pass pass1))
+	(GET "/register" []
+		(registration-page))
+  (POST "/register" [id name pass pass1]
+		(handle-registration id name pass pass1))
   (GET "/login" []
     (login-page))
 	(POST "/login" [id pass]

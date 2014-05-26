@@ -11,5 +11,6 @@ CREATE TABLE `users` (
   `id` varchar(45) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `pass` varchar(100) DEFAULT NULL,
+  `active` tinyint default 0,
   PRIMARY KEY (`id`)
 );
