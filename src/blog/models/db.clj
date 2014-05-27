@@ -8,8 +8,8 @@
   (def db {:classname "com.mysql.jdbc.Driver" ; must be in classpath
            :subprotocol "mysql"
            :subname (str "//" db-host ":" db-port "/" db-name)
-           :user "root"
-           :password ""}))
+           :user "blog"
+           :password "blog"}))
 
 (defn create-user [user]
 	(sql/with-connection db (sql/insert-record :users user)))
