@@ -1,20 +1,20 @@
 (ns blog.routes.auth
 	(:require [hiccup.form :refer :all]
-			  [compojure.core :refer :all]
-			  [blog.routes.home :refer :all]
-			  [blog.views.layout :as layout]
-			  [noir.session :as session]
-			  [noir.response :as resp]
-			  [noir.validation :as vali]
-			  [noir.util.crypt :as crypt]
-			  [blog.models.db :as db])
+			[compojure.core :refer :all]
+			[blog.routes.home :refer :all]
+			[blog.views.layout :as layout]
+			[noir.session :as session]
+			[noir.response :as resp]
+			[noir.validation :as vali]
+			[noir.util.crypt :as crypt]
+			[blog.models.db :as db])
 	(:import java.sql.SQLException
 			 java.io.File))
 
 (defn valid? [id name pass pass1]
 	(vali/rule (vali/has-value? id)
 		[:id "user id is required"])
-  (vali/rule (vali/has-value? name)
+	(vali/rule (vali/has-value? name)
 		[:name "name is required"])
 	(vali/rule (vali/min-length? pass 5)
 		[:pass "password must be at least 5 characters"])
@@ -45,11 +45,11 @@
 	(if (valid? id name pass pass1)
 		(try
 			(db/create-user {
-        :id id
-        :name name
-        :pass (crypt/encrypt pass)
-        :active (get-active-flag)
-        :level (get-level-flag)})
+		:id id
+		:name name
+		:pass (crypt/encrypt pass)
+		:active (get-active-flag)
+		:level (get-level-flag)})
 			(resp/redirect "/login")
 			(catch Exception ex
 				(vali/rule false [:id (format-error id ex)])
@@ -69,10 +69,10 @@
 (defroutes auth-routes
 	(GET "/register" []
 		(registration-page))
-  (POST "/register" [id name pass pass1]
+	(POST "/register" [id name pass pass1]
 		(handle-registration id name pass pass1))
-  (GET "/login" []
-    (login-page))
+	(GET "/login" []
+		(login-page))
 	(POST "/login" [id pass]
 		(handle-login id pass))
 	(GET "/logout" []
