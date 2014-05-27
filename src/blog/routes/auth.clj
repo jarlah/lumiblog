@@ -45,11 +45,11 @@
 	(if (valid? id name pass pass1)
 		(try
 			(db/create-user {
-		:id id
-		:name name
-		:pass (crypt/encrypt pass)
-		:active (get-active-flag)
-		:level (get-level-flag)})
+				:id id
+				:name name
+				:pass (crypt/encrypt pass)
+				:active (get-active-flag)
+				:level (get-level-flag)})
 			(resp/redirect "/login")
 			(catch Exception ex
 				(vali/rule false [:id (format-error id ex)])
