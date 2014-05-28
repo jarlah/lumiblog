@@ -55,3 +55,6 @@
 
 (defn delete-user [id]
 	(sql/with-connection db (sql/delete-rows :users ["id=?" id])))
+
+(defn update-user [user]
+	(sql/with-connection db (sql/update-values :users ["id=?" (:id user)] user)))

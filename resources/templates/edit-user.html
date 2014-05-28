@@ -1,0 +1,35 @@
+{% extends "templates/base.html" %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span8">
+            <div class="panel panel-primary">
+                <header class="panel-heading">
+                    <h2 class="panel-title">Edit user</h2>
+                </header>
+                <div class="panel-body">
+                    <form action="" method="post">
+                        <div>
+                            <label for="id">User Id:</label>
+                            <p>{{id}}</p>
+                        </div>
+                        <div>
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" value="{{name}}"/>
+                        </div>
+                        <div>
+                            <label for="active">Active:</label>
+                            <input type="text" name="active" value="{{active}}" />
+                        </div>
+                        <div>
+                            <label for="level">Level:</label>
+                            <input type="text" name="level" value="{{level}}" />
+                        </div>
+                        <div>
+                            <input type="submit" value="Submit updates" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

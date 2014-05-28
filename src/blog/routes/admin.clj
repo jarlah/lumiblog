@@ -17,6 +17,9 @@
 (defn edit-entry [entry]
 	(layout/render "edit-entry.html" (merge entry {:errors (vali/get-errors (:title :content))})))
 
+(defn edit-user [user]
+	(layout/render "edit-user.html" user))
+
 (defn confirm-delete-entry [entry]
 	(layout/render "confirm-delete-entry.html" entry))
 
@@ -25,6 +28,9 @@
 
 (defn list-entries []
 	(layout/render "list-entries.html" {:entries (db/get-latest-entries 100)}))
+
+(defn list-users []
+	(layout/render "list-users.html" {:users (db/get-all-users)}))
 
 (defn valid-entry? [title content]
 	(vali/rule (vali/has-value? title)
@@ -59,8 +65,9 @@
 		(resp/redirect "/admin/entries"))
 	(edit-entry {:title title :content content})))
 
-(defn list-users []
-	(layout/render "list-users.html" {:users (db/get-all-users)}))
+(defn handle-edit-user [id name active level]
+  (db/update-user {:id id :name name :active active :level level})
+  (resp/redirect "/admin/users"))
 
 (defroutes admin-routes
 	(GET "/admin" []
@@ -81,6 +88,10 @@
 		 (restricted (handle-delete-entry id)))
 	(GET "/admin/users" []
 		 (restricted (list-users)))
+  (GET "/admin/user/:id" [id]
+		 (restricted (edit-user (db/get-user id))))
+  (POST "/admin/user/:id" [id name active level]
+		 (restricted (handle-edit-user id name active level)))
 	(GET "/admin/user/:id/delete" [id]
 		 (restricted (confirm-delete-user (db/get-user id))))
 	(POST "/admin/user/:id/delete" [id]

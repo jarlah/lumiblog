@@ -4,20 +4,20 @@
         <div class="span8">
             <div class="panel panel-primary">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Add new entry</h2>
+                    <h2 class="panel-title">Edit entry</h2>
                 </header>
                 <div class="panel-body">
                     <form action="" method="post">
                         <div>
                             <label for="title">Title:</label>
-                            <input type="title" name="title" style="width:100%" value="{{title}}"/>
+                            <input type="text" name="title" style="width:100%" value="{{title}}"/>
                         </div>
                         <div>
                             <label for="content">Content:</label>
                             <textarea rows="20" cols="20" name="content">{{content}}</textarea>
                         </div>
                         <div>
-                            <input type="submit" value="Submit entry" />
+                            <input type="submit" value="Submit updates" />
                         </div>
                         {% for error in errors %}
                         <div class="error">{{error}}</div>
