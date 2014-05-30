@@ -40,18 +40,18 @@
 (defn no-users [] (= 0 (user-count)))
 
 (defn get-active-flag []
-  (if (no-users)
-    ;; Then
-    1
-    ;; Else
-    0))
+	(if (no-users)
+	;; Then
+	1
+	;; Else
+	0))
 
 (defn get-level-flag []
-  (if (no-users)
-    ;; Then
-    0
-    ;; Else
-    1))
+	(if (no-users)
+	;; Then
+	0
+	;; Else
+	1))
 
 (defn handle-registration [id name pass pass1]
 	(if (valid-user? id name pass pass1)

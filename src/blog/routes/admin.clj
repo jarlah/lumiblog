@@ -8,8 +8,7 @@
 			[noir.response :as resp]
 			[noir.validation :as vali]))
 
-(defn admin-overview []
-	(layout/render "admin.html"))
+(defn admin-overview [] (layout/render "admin.html"))
 
 (defn render [template object] (layout/render template (conj object {:errors (vali/get-errors (keys object))})))
 
@@ -61,8 +60,8 @@
 	(edit-entry {:title title :content content})))
 
 (defn handle-edit-user [id name active level]
-  (db/update-user {:id id :name name :active active :level level})
-  (resp/redirect "/admin/users"))
+	(db/update-user {:id id :name name :active active :level level})
+	(resp/redirect "/admin/users"))
 
 (defroutes admin-routes
 	(GET "/admin" []
@@ -83,9 +82,9 @@
 		 (restricted (handle-delete-entry id)))
 	(GET "/admin/users" []
 		 (restricted (list-users)))
-  (GET "/admin/user/:id" [id]
+	(GET "/admin/user/:id" [id]
 		 (restricted (edit-user (db/get-user id))))
-  (POST "/admin/user/:id" [id name active level]
+	(POST "/admin/user/:id" [id name active level]
 		 (restricted (handle-edit-user id name active level)))
 	(GET "/admin/user/:id/delete" [id]
 		 (restricted (confirm-delete-user (db/get-user id))))

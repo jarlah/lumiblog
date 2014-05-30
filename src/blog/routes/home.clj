@@ -11,7 +11,7 @@
 (defn about-page []
 	(layout/render "about.html"))
 
-(defn perma-page [id]
+(defn post [id]
   (layout/render "entry.html" (db/get-entry id)))
 
 (defroutes home-routes
@@ -22,4 +22,4 @@
 	(GET "/about" []
 		(about-page))
   (GET "/post/:id" [id perma]
-    (perma-page id)))
+    (post id)))

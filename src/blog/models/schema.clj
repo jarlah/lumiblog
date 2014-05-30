@@ -9,7 +9,7 @@
 		(sql/create-table
 			:users
 			[:id "VARCHAR(255)"]
-      [:name "VARCHAR(255)"]
+			[:name "VARCHAR(255)"]
 			[:pass "VARCHAR(255)"])))
 
 (defn create-entries-table []
@@ -19,7 +19,7 @@
 			:entries
 			[:id "INT PRIMARY KEY AUTO_INCREMENT"]
 			[:title "VARCHAR(255)"]
-      [:content "LONGTEXT"]
-      [:createdDate "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"]
-      [:publishedDate "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"]
-      [:authorid "VARCHAR(255)"])))
+			[:content "LONGTEXT"]
+			[:createdDate "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"]
+			[:publishedDate "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"]
+			[:authorid "VARCHAR(255)"])))
