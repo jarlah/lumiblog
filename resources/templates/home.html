@@ -12,7 +12,7 @@
             {% for entry in entries %}
             <article class="panel panel-primary">
                 <header class="panel-heading">
-                    <h2 class="panel-title">{{entry.title}}</h2>
+                    <h2 class="panel-title"><a href="{{servlet-context}}/post/{{entry.id}}">{{entry.title}}</a></h2>
                     <time>{{entry.publishedDate|date:shortDate}}</time>
                 </header>
                 <div class="panel-body">

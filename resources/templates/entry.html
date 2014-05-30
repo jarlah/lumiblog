@@ -1,0 +1,19 @@
+{% extends "templates/base.html" %}
+{% block content %}
+  <div class="row-fluid">
+    <div class="span8">
+        <article class="panel panel-primary">
+            <header class="panel-heading">
+                <h2 class="panel-title">{{title}}</h2>
+                <time>{{publishedDate|date:shortDate}}</time>
+            </header>
+            <div class="panel-body">
+                {{content|safe}}
+            </div>
+            <footer class="panel-footer">
+                {{authorid}}
+            </footer>
+        </article>
+    </div>
+  </div>
+{% endblock %}

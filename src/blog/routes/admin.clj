@@ -11,26 +11,21 @@
 (defn admin-overview []
 	(layout/render "admin.html"))
 
-(defn add-entry [& [title content]]
-	(layout/render "edit-entry.html" {:title title :content content :errors (vali/get-errors (:title :content))}))
+(defn render [template object] (layout/render template (conj object {:errors (vali/get-errors (keys object))})))
 
-(defn edit-entry [entry]
-	(layout/render "edit-entry.html" (merge entry {:errors (vali/get-errors (:title :content))})))
+(defn add-entry [& [title content]] (render "edit-entry.html" {:title title :content content}))
 
-(defn edit-user [user]
-	(layout/render "edit-user.html" user))
+(defn edit-entry [entry] (render "edit-entry.html" entry))
 
-(defn confirm-delete-entry [entry]
-	(layout/render "confirm-delete-entry.html" entry))
+(defn edit-user [user] (render "edit-user.html" user))
 
-(defn confirm-delete-user [user]
-	(layout/render "confirm-delete-user.html" user))
+(defn confirm-delete-entry [entry] (render "confirm-delete-entry.html" entry))
 
-(defn list-entries []
-	(layout/render "list-entries.html" {:entries (db/get-latest-entries 100)}))
+(defn confirm-delete-user [user] (render "confirm-delete-user.html" user))
 
-(defn list-users []
-	(layout/render "list-users.html" {:users (db/get-all-users)}))
+(defn list-entries [] (render "list-entries.html" {:entries (db/get-latest-entries 100)}))
+
+(defn list-users [] (render "list-users.html" {:users (db/get-all-users)}))
 
 (defn valid-entry? [title content]
 	(vali/rule (vali/has-value? title)
