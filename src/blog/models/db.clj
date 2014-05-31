@@ -7,8 +7,8 @@
 (let [host "localhost" 
 	  port 3306 
 	  database "blog"
-	  user "root"
-	  password ""]
+	  user "blog"
+	  password "blog"]
 	(def db {:classname "com.mysql.jdbc.Driver"
 			:subprotocol "mysql"
 			:subname (db-url host port database)
