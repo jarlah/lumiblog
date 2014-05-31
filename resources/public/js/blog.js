@@ -1,6 +1,6 @@
 $(document).ready(function () {
   tinymce.init({
-    mode: "textareas",
+    selector: "textarea.editor",
     plugins: [
         "advlist autolink lists link image charmap print preview anchor",
         "searchreplace visualblocks code fullscreen",

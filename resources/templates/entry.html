@@ -14,6 +14,51 @@
                 {{authorid}}
             </footer>
         </article>
+        <p><a href="#add-comment">Add a comment</a></p>
+        {% for comment in comments %}
+        <div class="panel panel-info">
+        	<header class="panel-heading">
+                <h2 class="panel-title">{{comment.title}}</h2>
+                <time>{{comment.publishedDate|date:shortDate}}</time>
+            </header>
+            <div class="panel-body">
+        		{{comment.content}}
+        	</div>
+        	<footer class="panel-footer">
+                {{comment.name}}
+            </footer>
+        </div>
+        {% endfor %}
+        <a href="#add-comment" name="add-comment">Add your thoughs here</a>
+		<form action="" method="post">
+			<input type="hidden" name="entry" value="{{id}}" />
+			<table>
+				<tr>
+					<td><label for="name">Name:</label></td>
+					<td><input type="text" name="name" value="{{comment.name}}" /></td>
+				</tr>
+				<tr>
+					<td>
+						<label for="title">Title:</label>
+					</td>
+					<td>
+						<input type="text" name="title" value="{{comment.title}}" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="content">Content:</label>
+					</td>
+					<td>
+						<textarea name="content">{{comment.content}}</textarea>
+					</td>
+				</tr>
+			</table>
+			<input type="submit" value="Add coment" />
+			{% for error in errors %}
+            <div class="error">{{error}}</div>
+            {% endfor %}
+		</form>
     </div>
   </div>
 {% endblock %}

@@ -4,7 +4,6 @@
 		[blog.routes.auth :refer [auth-routes]]
 		[blog.routes.admin :refer [admin-routes]]
 		[blog.middleware :as middleware]
-		[blog.models.schema :as schema]
 		[blog.models.db :as db]
 		[noir.util.middleware :refer [app-handler]]
 		[compojure.route :as route]

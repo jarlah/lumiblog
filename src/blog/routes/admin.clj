@@ -8,24 +8,6 @@
 			[noir.response :as resp]
 			[noir.validation :as vali]))
 
-(defn admin-overview [] (layout/render "admin.html"))
-
-(defn render [template object] (layout/render template (conj object {:errors (vali/get-errors (keys object))})))
-
-(defn add-entry [& [title content]] (render "edit-entry.html" {:title title :content content}))
-
-(defn edit-entry [entry] (render "edit-entry.html" entry))
-
-(defn edit-user [user] (render "edit-user.html" user))
-
-(defn confirm-delete-entry [entry] (render "confirm-delete-entry.html" entry))
-
-(defn confirm-delete-user [user] (render "confirm-delete-user.html" user))
-
-(defn list-entries [] (render "list-entries.html" {:entries (db/get-latest-entries 100)}))
-
-(defn list-users [] (render "list-users.html" {:users (db/get-all-users)}))
-
 (defn valid-entry? [title content]
 	(vali/rule (vali/has-value? title)
 		[:title "title is required"])
@@ -37,12 +19,36 @@
 		[:content "content must be at least 5 characters"])
 	(not (vali/errors? :title :content)))
 
+(defn admin-overview [] 
+	(layout/render "admin.html"))
+
+(defn add-entry [& [title content]] 
+	(layout/render "edit-entry.html" (conj {:title title :content content} {:errors (vali/get-errors (:title :content))})))
+
+(defn edit-entry [entry] 
+	(layout/render "edit-entry.html" (conj entry {:errors (vali/get-errors (:title :content))})))
+
+(defn edit-user [user] 
+	(layout/render "edit-user.html" user))
+
+(defn confirm-delete-entry [entry] 
+	(layout/render "confirm-delete-entry.html" entry))
+
+(defn confirm-delete-user [user] 
+	(layout/render "confirm-delete-user.html" user))
+
+(defn list-entries [] 
+	(layout/render "list-entries.html" {:entries (db/get-latest-entries 100)}))
+
+(defn list-users [] 
+	(layout/render "list-users.html" {:users (db/get-all-users)}))
+
 (defn handle-add-entry [title content]
 	(if (valid-entry? title content)
-	(do
-		(db/create-entry {:title title :content content :authorid (:name (session/get :user))})
-		(resp/redirect "/admin/entries"))
-	(add-entry title content)))
+		(do
+			(db/create-entry {:title title :content content :authorid (:name (session/get :user))})
+			(resp/redirect "/admin/entries"))
+		(add-entry title content)))
 
 (defn handle-delete-entry [id]
 	(db/delete-entry id)
@@ -54,10 +60,10 @@
 
 (defn handle-edit-entry [id title content]
 	(if (valid-entry? title content)
-	(do
-		(db/update-entry id {:title title :content content})
-		(resp/redirect "/admin/entries"))
-	(edit-entry {:title title :content content})))
+		(do
+			(db/update-entry id {:title title :content content})
+			(resp/redirect "/admin/entries"))
+		(edit-entry {:title title :content content})))
 
 (defn handle-edit-user [id name active level]
 	(db/update-user {:id id :name name :active active :level level})

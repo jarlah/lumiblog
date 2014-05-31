@@ -1,18 +1,25 @@
 (ns blog.models.db
 	(:require [clojure.java.jdbc :as sql]))
 
-(let [db-host "localhost"
-      db-port 3306
-      db-name "blog"]
+(defn db-url [host port database]
+	(str "//" host ":" port "/" database))
 
-  (def db {:classname "com.mysql.jdbc.Driver" ; must be in classpath
-           :subprotocol "mysql"
-           :subname (str "//" db-host ":" db-port "/" db-name)
-           :user "blog"
-           :password "blog"}))
+(let [host "localhost" 
+	  port 3306 
+	  database "blog"
+	  user "root"
+	  password ""]
+	(def db {:classname "com.mysql.jdbc.Driver"
+			:subprotocol "mysql"
+			:subname (db-url host port database)
+			:user user
+			:password password}))
 
 (defn create-user [user]
 	(sql/with-connection db (sql/insert-record :users user)))
+
+(defn create-comment [comment]
+	(sql/with-connection db (sql/insert-record :comments comment)))
 
 (defn get-all-users []
 	(sql/with-connection db
@@ -43,6 +50,11 @@
 	(sql/with-connection db
 		(sql/with-query-results
 			res ["select * from entries where id=?" id] (first res))))
+
+(defn get-comments [id]
+	(sql/with-connection db
+		(sql/with-query-results
+			res ["select * from comments where entry=?" id] (doall res))))
 
 (defn create-entry [entry]
 	(sql/with-connection db (sql/insert-record :entries entry)))

@@ -35,23 +35,17 @@
 		:else
 			"An error has occured while processing the request"))
 
-(defn user-count [] (:count (db/get-user-count)))
+(defn user-count [] 
+	(:count (db/get-user-count)))
 
-(defn no-users [] (= 0 (user-count)))
+(defn no-users [] 
+	(= 0 (user-count)))
 
-(defn get-active-flag []
-	(if (no-users)
-	;; Then
-	1
-	;; Else
-	0))
+(defn get-active-flag [] 
+	(if (no-users) 1 0))
 
-(defn get-level-flag []
-	(if (no-users)
-	;; Then
-	0
-	;; Else
-	1))
+(defn get-level-flag [] 
+	(if (no-users) 0 1))
 
 (defn handle-registration [id name pass pass1]
 	(if (valid-user? id name pass pass1)
