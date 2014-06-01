@@ -44,7 +44,7 @@
 (defn get-latest-entries [max]
 	(sql/with-connection db
 		(sql/with-query-results
-			res ["select * from entries order by publishedDate desc limit ?" max] (doall res))))
+			res ["select entries.*, count(comments.entry) as comments from entries left join comments on (entries.id = comments.entry) group by entries.id order by entries.publishedDate desc limit ?" max] (doall res))))
 
 (defn get-entry [id]
 	(sql/with-connection db
